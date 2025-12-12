@@ -1,283 +1,246 @@
-# AWS Cloud Journey ☁️
+# Lab: Introduction to Amazon EC2
 
-> Documentação completa da minha transição de carreira para Cloud Engineering  
-> **Ricardo Altino de Freitas Jr** | Nov 2025 - Jun 2026 (6 meses)  
-> **Programa:** AWS re/Start | Escola da Nuvem
-
----
-
-## 📋 Sobre Este Repositório
-
-Este repositório documenta minha jornada de aprendizado em Cloud Computing, desde fundamentos AWS até certificação Solutions Architect Associate e projetos práticos com integração de IA.
-
-**Por que público?**
-
-* ✅ Accountability (compromisso público aumenta disciplina)
-* ✅ Demonstração de progresso para recrutadores
-* ✅ Ajudar outros profissionais em transição de carreira
-* ✅ Learning in public (aprender ensinando)
+**Data**: 12/Dezembro/2025  
+**Duração**: ~1h  
+**Dificuldade**: Iniciante
 
 ---
 
-## 🗺️ Roadmap Completo (6 meses)
+## 🎯 Objetivo
 
-### ✅ Fase 1: Fundação (Nov-Dez 2025)
-
-**Objetivo:** Dominar fundamentos AWS e criar primeiro projeto
-
-* Setup GitHub profissional
-* Módulos: Cloud Foundations, Networking, Security
-* Projeto 1: Portfolio Website (S3 + CloudFront)
-* Script: AWS Cost Calculator (Python)
-* 20+ commits, documentação estruturada
-
-**Meta:** Ter repositório que impressiona recrutadores
+Compreender os fundamentos do Amazon EC2 através de um laboratório prático que aborda lançamento, configuração, monitoramento, redimensionamento e terminação de instâncias.
 
 ---
 
-### 🔄 Fase 2: Consolidação (Jan-Fev 2026)
-
-**Objetivo:** 3 projetos no portfólio + preparação para certificação
-
-* Módulos: Compute, Databases, Storage, Monitoring
-* Projeto 2: Multi-tier Web App (EC2 Auto Scaling + ALB + RDS)
-* Projeto 3: Serverless Data Pipeline (Lambda + API Gateway + DynamoDB)
-* Scripts de automação (Python + Bash)
-* Começar curso Stephane Maarek (Solutions Architect)
-
-**Meta:** Portfólio com 3 projetos demonstráveis
-
----
-
-### 🎯 Fase 3: Certificação (Mar 2026)
-
-**Objetivo:** AWS Certified Solutions Architect - Associate
-
-* Completar curso preparatório
-* 500+ questões de practice exams
-* Revisar pontos fracos (identificados nos exames)
-* Hands-on labs (AWS Sandbox)
-* **PROVA AGENDADA:** Março 2026
-
-**Meta:** Certificação AWS aprovada (score 750+)
-
----
-
-### 🚀 Fase 4: Especialização + Job Hunting (Abr-Jun 2026)
-
-**Objetivo:** Projeto com IA + conseguir primeira vaga Cloud Engineer
-
-* Módulo: AI/ML on AWS
-* Projeto 4: AI-Powered Application (Rekognition/Bedrock)
-* Implementar CI/CD em todos os projetos (GitHub Actions)
-* Converter projetos para CloudFormation (IaC)
-* Otimizar LinkedIn + currículo
-* Aplicar para 50+ vagas (Cloud Engineer Jr/Associate)
-* Preparação técnica para entrevistas
-
-**Meta:** Oferta de emprego como Cloud Engineer (R$ 5k-8k)
-
----
-
-## 📂 Estrutura do Repositório
+## 🏗️ Arquitetura Implementada
 ```
-aws-cloud-journey/
-│
-├── 📝 learning-notes/        # Anotações semanais organizadas por módulo
-│   ├── week-01-foundations.md
-│   ├── week-02-networking.md
-│   └── ...
-│
-├── 🐍 scripts/               # Scripts Python/Bash para automação AWS
-│   ├── cost-calculator/
-│   ├── tag-validator/
-│   └── ...
-│
-├── 🚀 projects/              # Projetos práticos completos
-│   ├── 01-portfolio-website/
-│   ├── 02-multi-tier-app/
-│   ├── 03-serverless-pipeline/
-│   └── 04-ai-integration/
-│
-├── 🔬 09-dez-cloudfront/     # Labs AWS hands-on (organizados por data)
-│
-└── 🎓 certifications/        # Preparação para certificações AWS
-    └── solutions-architect-associate/
+Internet → Security Group (HTTP:80) → EC2 Instance (Apache Web Server)
+                                      ├── EBS Volume (10 GiB)
+                                      └── CloudWatch Monitoring
 ```
 
----
-
-## 📊 Progresso Atual
-
-**Semana:** 2 de 24  
-**Fase:** Fundação (Nov-Dez 2025)
-
-### Módulos AWS re/Start
-
-* 🔄 Cloud Foundations (em progresso)
-* ⏳ Networking (0%)
-* ⏳ Security (0%)
-* ⏳ Compute - EC2 (0%)
-* 🔄 Storage - S3 (CloudFront lab concluído)
-* ⏳ Databases - RDS/DynamoDB (0%)
-
-**Total:** 1/15 módulos principais iniciados
-
-### Labs Práticos Concluídos
-
-* ✅ **09/Dez/2025**: Amazon CloudFront + Origin Access Control
-  - Distribuição CDN criada
-  - Análise técnica OAI vs OAC (500 palavras)
-  - Integração S3 + CloudFront
-  - [Ver detalhes](09-dez-cloudfront/)
-
-### Projetos
-
-* 🔄 Projeto 1: Portfolio Website (60% - website S3 ao vivo)
-* 📋 Projeto 2: Multi-tier App (planejado)
-* 📋 Projeto 3: Serverless Pipeline (planejado)
-* 📋 Projeto 4: AI Integration (planejado)
-
-**Total:** 1/4 projetos em andamento
-
-### Certificações
-
-* 📚 Solutions Architect Associate (em preparação - prova mar/2026)
+**Componentes:**
+- **EC2 Instance**: Web Server (t3.micro → t3.small)
+- **AMI**: Amazon Linux 2023
+- **Security Group**: Web Server security group (inbound HTTP)
+- **EBS Volume**: Root volume expandido (8 GiB → 10 GiB)
+- **User Data**: Script de instalação automática do Apache
+- **Termination Protection**: Habilitado e testado
 
 ---
 
-## 🛠️ Stack Tecnológica
+## ✅ O Que Foi Realizado
 
-**Cloud Platform:**  
-AWS (EC2, S3, Lambda, RDS, DynamoDB, VPC, CloudFormation, CloudFront, Route53, IAM, CloudWatch)
+### 1. **Lançamento da Instância EC2**
+- Instance Type: t3.micro (2 vCPUs, 1 GiB RAM)
+- AMI: Amazon Linux 2023
+- VPC: Lab VPC (Public Subnet 1)
+- Security Group: Web Server security group
+- Termination Protection: Habilitado
+- User Data: Script de instalação do Apache
 
-**Linguagens:**  
-Python (scripts, Lambda functions), Bash/Shell (automação), JavaScript (frontend)
+### 2. **Configuração do Web Server**
+User Data script instalou automaticamente:
+```bash
+#!/bin/bash
+dnf -y install httpd
+systemctl enable httpd
+systemctl start httpd
+echo '<html><h1>Hello From Your Web Server!</h1></html>' > /var/www/html/index.html
+```
 
-**Ferramentas:**  
-Git/GitHub, AWS CLI, VS Code, Draw.io (diagramas), Linux (WSL Ubuntu)
+### 3. **Monitoramento da Instância**
+- Status Checks: System reachability ✅
+- Instance reachability: ✅
+- EBS reachability: ✅
+- CloudWatch Metrics: Consultados
+- System Log: Analisado (verificado instalação do httpd)
+- Instance Screenshot: Capturado
 
-**Estudando:**  
-Terraform, Docker, Kubernetes (EKS), CI/CD (GitHub Actions, CodePipeline)
+### 4. **Configuração de Security Group**
+- Regra inicial: Nenhuma (bloqueado)
+- Regra adicionada: HTTP (port 80) from Anywhere (0.0.0.0/0)
+- Resultado: Acesso web funcionando ✅
 
----
+### 5. **Redimensionamento**
+**Instance Type:**
+- Original: t3.micro (2 vCPUs, 1 GiB)
+- Novo: t3.small (2 vCPUs, 2 GiB) ✅
 
-## 📈 Estatísticas
+**EBS Volume:**
+- Original: 8 GiB
+- Novo: 10 GiB ✅
 
-[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=rfreitasjr&show_icons=true&theme=dark&hide=stars&count_private=true)](https://github.com/rfreitasjr)
+**Processo:**
+1. Stop instance
+2. Change instance type
+3. Modify EBS volume
+4. Start instance
 
-[![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=rfreitasjr&layout=compact&theme=dark)](https://github.com/rfreitasjr)
-
----
-
-## 💡 Aprendizados Chave (atualizado semanalmente)
-
-### Semana 1 (28/Nov - 04/Dez)
-
-* ✅ Setup GitHub profissional: README de perfil + repositório estruturado
-* ✅ Primeiro contato com AWS Sandbox
-* ✅ Website S3 estático ao vivo
-* ✅ Python: funções básicas com listas
-* ✅ Linux/WSL Ubuntu instalado e funcional
-
-### Semana 2 (05/Dez - 11/Dez)
-
-* ✅ **CloudFront**: Distribuição CDN com edge locations
-* ✅ **OAI vs OAC**: Análise técnica comparativa de métodos de controle de acesso
-* ✅ **Python avançado**: 3 funções com listas (somar, filtrar, buscar)
-* ✅ **Segurança S3**: Bloqueio de acesso público + controle via CloudFront
-* 🔄 **Documentação**: README detalhado de cada lab
-
----
-
-## 🎯 Metas Mensuráveis
-
-### Dezembro 2025
-
-* [ ] 40+ commits no GitHub
-* [x] 1 lab AWS documentado (CloudFront)
-* [x] 2 scripts Python funcionais
-* [ ] 5 módulos AWS concluídos
-* [ ] 1 post LinkedIn técnico
-
-### Janeiro 2026
-
-* [ ] 60+ commits totais
-* [ ] 2 projetos implementados
-* [ ] 10 módulos AWS concluídos
-* [ ] Começar estudo certificação
-
-### Fevereiro 2026
-
-* [ ] 100+ commits totais
-* [ ] 3 projetos no portfólio
-* [ ] Todos módulos AWS concluídos
-* [ ] 50% curso certificação
-
-### Março 2026
-
-* [ ] ✅ Certificação AWS aprovada
-* [ ] CloudFormation em todos projetos
-
-### Abril-Junho 2026
-
-* [ ] 4 projetos completos
-* [ ] 10+ aplicações para vagas
-* [ ] ✅ Oferta de emprego aceita
+### 6. **Termination Protection**
+- Primeira tentativa: Bloqueado (proteção ativa) ✅
+- Proteção desabilitada
+- Segunda tentativa: Sucesso ✅
+- Instância terminada
 
 ---
 
-## 📚 Recursos de Estudo
+## 📚 Conceitos Aprendidos
 
-### Oficiais AWS
+### Amazon EC2
+- **Elastic Compute Cloud**: Capacidade computacional redimensionável na nuvem
+- **Instance Types**: Combinações de CPU, memória, storage e rede
+- **AMI (Amazon Machine Image)**: Template para o sistema operacional
+- **User Data**: Scripts executados no boot da instância
+- **Elastic IP**: IPs públicos (não usado neste lab)
 
-* [AWS Documentation](https://docs.aws.amazon.com/)
-* [AWS Well-Architected](https://aws.amazon.com/architecture/well-architected/)
-* [AWS Skill Builder](https://skillbuilder.aws/)
+### Security Groups
+- **Firewall virtual**: Controla tráfego de entrada/saída
+- **Stateful**: Regras de retorno automáticas
+- **Port 80 (HTTP)**: Necessário para web servers
+- **0.0.0.0/0**: Anywhere (não recomendado para produção!)
 
-### Cursos
+### Monitoramento
+- **CloudWatch**: Métricas de performance
+- **System Log**: Output do console (troubleshooting)
+- **Instance Screenshot**: Visão do console virtual
+- **Status Checks**: System e Instance reachability
 
-* AWS re/Start Program | Escola da Nuvem
-* Stephane Maarek - Solutions Architect Associate (Udemy)
-* Adrian Cantrill - AWS Courses
+### EBS (Elastic Block Store)
+- **Root Volume**: Disco de boot da instância
+- **Redimensionamento**: Pode ser expandido (não diminuído)
+- **Attached to instance**: Sobrevive ao stop (não ao terminate)
 
-### Comunidade
-
-* [r/AWSCertifications](https://reddit.com/r/AWSCertifications)
-* AWS Brasil Telegram
-
----
-
-## 🤝 Como Acompanhar
-
-Interessado na jornada? Você pode:
-
-* ⭐ **Star** este repositório
-* 👀 **Watch** para receber notificações de commits
-* 🔀 **Fork** se quiser usar como template para sua própria jornada
-* 💬 **Issues/Discussions** para dúvidas ou sugestões
-
----
-
-## 📫 Contato
-
-**Ricardo Altino de Freitas Jr**
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/ricardo-freitas-jr-cloud-ia)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:rfreitasjr@yahoo.com.br)
-[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rfreitasjr)
+### Termination Protection
+- **Safeguard**: Previne terminação acidental
+- **Modificável**: Pode ser habilitado/desabilitado
+- **Importante**: Sempre habilitar em produção!
 
 ---
 
-## 📝 Licença
+## 📂 Arquivos Neste Diretório
 
-Este projeto está sob a licença MIT. Sinta-se livre para usar este conteúdo como referência para sua própria jornada de aprendizado.
+- `instancia_ec2_criada.png` - Screenshot da instância criada
+- `system_log_ec2_instance.png` - System log mostrando boot e instalação
+- `README.md` - Este arquivo
 
 ---
 
-**De gestão de projetos fotovoltaicos a Cloud Engineering**  
-*Documentando cada passo da transformação* 🚀
+## 🔄 Como Reproduzir
 
-[![Visitors](https://visitor-badge.laobi.icu/badge?page_id=rfreitasjr.aws-cloud-journey)](https://github.com/rfreitasjr/aws-cloud-journey)
+### Pré-requisitos
+- Conta AWS (ou AWS Sandbox)
+- VPC com subnet pública
 
-*Última atualização: 10/Dezembro/2025*
+### Passo a Passo
+```bash
+# 1. Lançar instância EC2
+# - AMI: Amazon Linux 2023
+# - Instance Type: t3.micro
+# - VPC: Lab VPC / Public Subnet
+# - Security Group: Criar novo (permitir SSH se necessário)
+# - User Data: Script de instalação do Apache
+# - Termination Protection: Enable
+
+# 2. Aguardar Status Checks (3/3 passed)
+
+# 3. Configurar Security Group
+# - Adicionar regra: HTTP (port 80) from Anywhere
+
+# 4. Testar acesso web
+# - Copiar Public IPv4 address
+# - Acessar: http://[IP-PUBLICO]
+# - Verificar: "Hello From Your Web Server!"
+
+# 5. Redimensionar (opcional)
+# - Stop instance
+# - Actions → Instance Settings → Change instance type
+# - Actions → Elastic Block Store → Modify volume
+# - Start instance
+
+# 6. Terminar instância
+# - Desabilitar Termination Protection
+# - Actions → Instance State → Terminate
+```
+
+---
+
+## 💡 Aprendizados Principais
+
+### Técnicos
+- EC2 é o serviço fundamental de compute da AWS
+- User Data permite automação no boot
+- Security Groups funcionam como firewall stateful
+- Instâncias podem ser redimensionadas (requer stop)
+- EBS volumes podem ser expandidos (não diminuídos)
+- CloudWatch fornece métricas detalhadas
+
+### Segurança
+- **Sempre** usar Security Groups restritivos
+- 0.0.0.0/0 é aceitável para labs, **não para produção**
+- Termination Protection é crucial em produção
+- System Logs ajudam em troubleshooting
+- Status Checks monitoram saúde da instância
+
+### Boas Práticas
+- Nomear recursos descritivamente
+- Usar tags para organização
+- Habilitar Termination Protection em produção
+- Monitorar custos (EC2 cobra por hora)
+- Parar instâncias quando não estiverem em uso
+- Documentar configurações com screenshots
+
+### Custos
+- **Running instance**: Cobra por hora
+- **Stopped instance**: Não cobra compute, apenas EBS
+- **Terminated instance**: Não cobra nada
+- **EBS**: Cobra por GiB/mês (mesmo stopped)
+
+---
+
+## 🔗 Recursos Adicionais
+
+- [Launch Your Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/LaunchingAndUsingInstances.html)
+- [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/)
+- [Amazon Machine Images (AMI)](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html)
+- [User Data and Shell Scripts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html)
+- [Security Groups](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html)
+- [CloudWatch Metrics](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html)
+
+---
+
+## 🎯 Próximos Passos
+
+- [ ] Conectar via SSH (requer Key Pair)
+- [ ] Configurar Elastic IP (IP público fixo)
+- [ ] Implementar Auto Scaling
+- [ ] Configurar Load Balancer
+- [ ] Integrar com RDS (banco de dados)
+- [ ] Implementar backup automatizado (snapshots)
+
+---
+
+## 📊 Recursos Criados
+
+| Recurso | Especificação | Região | Status |
+|---------|---------------|--------|--------|
+| EC2 Instance | t3.micro → t3.small | us-west-2 | ✅ Terminada |
+| EBS Volume | 8 GiB → 10 GiB | us-west-2 | ✅ Terminada |
+| Security Group | Web Server SG (HTTP:80) | us-west-2 | ✅ Criado |
+| Public IP | 44.244.55.208 (exemplo) | - | ✅ Liberado |
+
+---
+
+## 📈 Tempo Investido
+
+- **Lab EC2**: ~1h
+- **Documentação**: ~30min (em andamento)
+- **Screenshots**: ~5min
+
+**Total**: ~1h 35min
+
+---
+
+**Lab concluído com sucesso!** ✅  
+
+*Ricardo Freitas Jr - AWS re/Start Program - Semana 2 - Sexta 12/Dez*
